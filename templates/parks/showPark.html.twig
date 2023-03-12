@@ -1,0 +1,32 @@
+{% extends "parks/basePark.html.twig" %}
+
+  {% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col text-center">
+        <h2>{{ cocktail.name }}</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <img src="{{ cocktail.image }}" />
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col">
+            Category: {{ cocktail.category }} - Glass type: {{ cocktail.glass }}
+
+          </div>
+        </div>
+        <div class="row">
+          <ul>
+            {% for ingrediente in cocktail.ingredientes %}
+            <li>{{ ingrediente.primero }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
