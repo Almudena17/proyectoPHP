@@ -16,6 +16,8 @@
                 <p class="card-text">Superficie: {{ park.area }}</p>
                 <p class="card-text">Año de creación: {{ park.age }}</p>
                 <a href="{{ path("showPark", {id:park.id}) }}" class="btn btn-primary">Más Info</a>
+                <a href="{{ path("editPark", {id:park.id}) }}" class="btn btn-primary">Editar</a>
+                <a href="{{ path("removePark", {id:park.id}) }}" class="btn btn-primary">Borrar</a>
             </div>
         </div>
         {% endfor %}

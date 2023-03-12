@@ -36,6 +36,7 @@ class ParkType extends AbstractType
                 "choice_label" => "name",
                 "multiple" => true,
                 "expanded" =>true,
+                "label" => "Distrito",
             ])
             ->add("enviar", SubmitType::class);
         ;

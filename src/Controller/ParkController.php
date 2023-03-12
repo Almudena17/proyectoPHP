@@ -140,4 +140,32 @@ class ParkController extends AbstractController {
             "parkForm" => $form
         ]);
     }
+
+    #[Route("/edit/park/{id}", name: "editPark")]
+    public function editPark(Request $request, EntityManagerInterface $doctrine, $id) {
+        $repository = $doctrine -> getRepository(Park::class);
+        $park = $repository -> find($id);
+        $form = $this -> createForm(ParkType::class, $park);
+        $form -> handleRequest($request);
+        if ($form -> isSubmitted() && $form -> isValid()) {
+            $park = $form -> getData();
+            $doctrine -> persist($park);
+            $doctrine -> flush();
+            $this -> addFlash("success", "Parque añadido correctamente");
+            return $this -> redirectToRoute("listPark");
+        }
+        return $this -> renderForm("parks/insertPark.html.twig", [
+            "parkForm" => $form
+        ]);
+    }
+
+    #[Route("/remove/park/{id}", name:"removePark")]
+    public function removePark(EntityManagerInterface $doctrine, $id) {
+        $repository = $doctrine -> getRepository(Park::class);
+        $park = $repository -> find($id);
+        $doctrine -> remove($park);
+        $doctrine -> flush();
+        $this -> addFlash("success", "Parque eliminado correctamente");
+        return $this -> redirectToRoute("listPark");
+    }
 }
