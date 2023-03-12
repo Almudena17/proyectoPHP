@@ -4,25 +4,24 @@
   <div class="container">
     <div class="row">
       <div class="col text-center">
-        <h2>{{ cocktail.name }}</h2>
+        <h2>{{ park.name }}</h2>
       </div>
     </div>
     <div class="row">
       <div class="col">
-        <img src="{{ cocktail.image }}" />
+        <img src="{{ park.image }}" />
       </div>
       <div class="col">
         <div class="row">
           <div class="col">
-            Category: {{ cocktail.category }} - Glass type: {{ cocktail.glass }}
-
+            Descripción: {{ park.description }}
+            Superficie: {{ park.area }}
+            Año de creación: {{ park.age }}
           </div>
         </div>
         <div class="row">
           <ul>
-            {% for ingrediente in cocktail.ingredientes %}
-            <li>{{ ingrediente.primero }}</li>
-            {% endfor %}
+            
           </ul>
         </div>
       </div>

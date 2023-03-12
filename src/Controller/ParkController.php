@@ -20,7 +20,7 @@ class ParkController extends AbstractController {
         return $this -> render("parks/showPark.html.twig", ["park" => $park]);
     }
 
-    #[Route("/parks")]
+    #[Route("/parks", name: "listPark")]
     public function listParks() {
         $parks = [
         [

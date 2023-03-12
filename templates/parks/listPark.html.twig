@@ -4,14 +4,15 @@
 
 <h2>Listado de parques</h2>
     <div class="row row-cols-1 row-cols-md-2">
-    {% for cocktail in cocktails %}
+    {% for park in parks %}
         <div class="col mb-4">
             <div class="card" style="width: 18rem">
-            <img src="{{ cocktail.image }}" class="card-img-top" />
+            <img src="{{ park.image }}" class="card-img-top" />
             <div class="card-body">
-                <h5 class="card-title">{{ cocktail.name }}</h5>
-                <p class="card-text">{{ cocktail.category }}</p>
-                <a href="{{ path("showCocktail", {id:cocktail.id}) }}" class="btn btn-primary">Más Info</a>
+                <h5 class="card-title">{{ park.name }}</h5>
+                <p class="card-text">Superficie: {{ park.area }}</p>
+                <p class="card-text">Año de creación: {{ park.age }}</p>
+                <a href="{{ path("showPark", {id:park.id}) }}" class="btn btn-primary">Más Info</a>
             </div>
         </div>
         {% endfor %}
