@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ParkRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +30,14 @@ class Park
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $age = null;
+
+    #[ORM\ManyToMany(targetEntity: District::class, inversedBy: 'parks')]
+    private Collection $districts;
+
+    public function __construct()
+    {
+        $this->districts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +100,30 @@ class Park
     public function setAge(?string $age): self
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, District>
+     */
+    public function getDistricts(): Collection
+    {
+        return $this->districts;
+    }
+
+    public function addDistrict(District $district): self
+    {
+        if (!$this->districts->contains($district)) {
+            $this->districts->add($district);
+        }
+
+        return $this;
+    }
+
+    public function removeDistrict(District $district): self
+    {
+        $this->districts->removeElement($district);
 
         return $this;
     }

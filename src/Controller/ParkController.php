@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\District;
 use App\Entity\Park;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -82,6 +83,27 @@ class ParkController extends AbstractController {
         $park8 -> setArea("12,18 hectáreas");
         $park8 -> setAge("1972");
 
+        $district1 = new District();
+        $district1 -> setName("Centro");
+
+        $district2 = new District();
+        $district2 -> setName("Salamanca");
+
+        $district3 = new District();
+        $district3 -> setName("Chamberí");
+
+        $district4 = new District();
+        $district4 -> setName("Puente de Vallecas");
+
+        $park1 -> addDistrict($district1);
+        $park2 -> addDistrict($district1);
+        $park3 -> addDistrict($district2);
+        $park4 -> addDistrict($district2);
+        $park5 -> addDistrict($district3);
+        $park6 -> addDistrict($district3);
+        $park7 -> addDistrict($district4);
+        $park8 -> addDistrict($district4);
+
         $doctrine -> persist($park1);
         $doctrine -> persist($park2);
         $doctrine -> persist($park3);
@@ -90,6 +112,11 @@ class ParkController extends AbstractController {
         $doctrine -> persist($park6);
         $doctrine -> persist($park7);
         $doctrine -> persist($park8);
+
+        $doctrine -> persist($district1);
+        $doctrine -> persist($district2);
+        $doctrine -> persist($district3);
+        $doctrine -> persist($district4);
 
         $doctrine -> flush();
 

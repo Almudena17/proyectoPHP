@@ -13,15 +13,19 @@
       </div>
       <div class="col">
         <div class="row">
-          <div class="col">
             Descripción: {{ park.description }}
-            Superficie: {{ park.area }}
-            Año de creación: {{ park.age }}
-          </div>
         </div>
         <div class="row">
-          <ul>
-            
+          Superficie: {{ park.area }}
+        </div>
+        <div class="row">
+        Año de creación: {{ park.age }}
+        </div>
+        <div class="row">
+          <ul>Distrito :
+            {% for district in park.districts %}
+            <li>{{ district.name }}</li>
+            {% endfor %}
           </ul>
         </div>
       </div>
