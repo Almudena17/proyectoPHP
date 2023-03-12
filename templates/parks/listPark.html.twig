@@ -2,6 +2,9 @@
 
 {% block content %}
 
+{% for message in app.flashes("success") %}
+<p></p>
+{% endfor %}
 <h2>Listado de parques</h2>
     <div class="row row-cols-1 row-cols-md-2">
     {% for park in parks %}

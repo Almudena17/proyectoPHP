@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\District;
 use App\Entity\Park;
+use App\Form\ParkType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -121,6 +123,21 @@ class ParkController extends AbstractController {
         $doctrine -> flush();
 
         return new Response("Los parques se han insertado correctamente");
+    }
 
+    #[Route("/insert/park", name: "insertPark")]
+    public function insertPark(Request $request, EntityManagerInterface $doctrine) {
+        $form = $this -> createForm(ParkType::class);
+        $form -> handleRequest($request);
+        if ($form -> isSubmitted() && $form -> isValid()) {
+            $park = $form -> getData();
+            $doctrine -> persist($park);
+            $doctrine -> flush();
+            $this -> addFlash("success", "Parque añadido correctamente");
+            return $this -> redirectToRoute("listPark");
+        }
+        return $this -> renderForm("parks/insertPark.html.twig", [
+            "parkForm" => $form
+        ]);
     }
 }
