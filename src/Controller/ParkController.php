@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ParkController extends AbstractController {
 
@@ -159,6 +160,7 @@ class ParkController extends AbstractController {
         ]);
     }
 
+    #[IsGranted("ROLE_ADMIN")]
     #[Route("/remove/park/{id}", name:"removePark")]
     public function removePark(EntityManagerInterface $doctrine, $id) {
         $repository = $doctrine -> getRepository(Park::class);
